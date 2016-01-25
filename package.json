@@ -13,6 +13,14 @@
     "type": "git",
     "url": "https://github.com/stomybexy/node-excel-exporter.git"
   },
+  "keywords": [
+    "excel",
+    "xls",
+    "xlsx",
+    "jxls",
+    "java-excel",
+    "excel-java"
+  ],
   "files":["deps", "excel-exporter.js"],
   "dependencies": {
     "java": "^0.5.4",
