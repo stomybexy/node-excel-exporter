@@ -6,7 +6,7 @@ const util = require('util');
 var path = require('path');
 var java = require("java");
 var mvn = require('node-java-maven');
-java.classpath.push(path.join(__dirname, '..', 'deps/excel-reporter.jar'));
+java.classpath.push(path.join(__dirname, 'deps/excel-reporter.jar'));
 var _ = require('underscore');
 
 
@@ -26,7 +26,7 @@ util.inherits(ExcelExporter, EventEmitter);
 ExcelExporter.prototype._init = function () {
     var self = this;
    
-    mvn({ packageJsonPath: path.join(__dirname, '..', 'package.json') },function (err, mvnResults) {
+    mvn({ packageJsonPath: path.join(__dirname, 'package.json') },function (err, mvnResults) {
         if (err) {
             console.error('could not resolve maven dependencies', err);
             self.emit('error', err);
