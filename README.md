@@ -88,3 +88,4 @@ In excel template, you put placeholders for your data like this:
       ${obj.firstname}
       
 Please refer to [jxls documentation](http://jxls.sourceforge.net/1.x/index.html) for templates usage.
+Have a look to examples directory.
