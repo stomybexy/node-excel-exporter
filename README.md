@@ -16,7 +16,7 @@ For example
 
 ## Usage
 
-### Export javascript object
+### Export javascript objects and collections
 
 ```javascript
 var path = require('path');
@@ -41,6 +41,40 @@ var data = [
                 }
             ]
         }
+    }, {
+        name: 'myCollection',
+        value: [
+
+            {
+                color: "red",
+                value: "#f00"
+            },
+            {
+                color: "green",
+                value: "#0f0"
+            },
+            {
+                color: "blue",
+                value: "#00f"
+            },
+            {
+                color: "cyan",
+                value: "#0ff"
+            },
+            {
+                color: "magenta",
+                value: "#f0f"
+            },
+            {
+                color: "yellow",
+                value: "#ff0"
+            },
+            {
+                color: "black",
+                value: "#000"
+            }
+
+        ]
     }
 ];
 var tpl = path.join(__dirname, 'template.xlsx');
