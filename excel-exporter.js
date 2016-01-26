@@ -8,18 +8,24 @@ var java = require("java");
 var mvn = require('node-java-maven');
 var _ = require('underscore');
 
-var nodeToJava = require(path.join(__dirname, 'lib/node-to-java'));
+var nodeToJava = require(path.join(__dirname, 'lib/node-to-java-utils')).create();
 
-var XLSTransformer = java.import('net.sf.jxls.transformer.XLSTransformer');
-var JavaMap = java.import('java.util.HashMap');
+
 
 function ExcelExporter() {
     var self = this;
     this.ready = false;
+    this.java = {
+        XLSTransformer: undefined,
+        JavaMap: undefined
+    }
     EventEmitter.call(this);
 
     this.on('ready', function () {
         self.ready = true;
+        self.java.XLSTransformer = java.import('net.sf.jxls.transformer.XLSTransformer');
+        self.java.JavaMap = java.import('java.util.HashMap');
+
     });
 
     this._init();
@@ -33,15 +39,24 @@ ExcelExporter.prototype._init = function () {
     mvn(function (err, mvnResults) {
         if (err) {
             console.error('could not resolve maven dependencies', err);
-
-            self.emit('ready');
+            if (nodeToJava.ready) {
+                self.emit('ready');
+            }
+            else {
+                nodeToJava.once('ready', self.emit('ready'));
+            }
             return;
         }
         mvnResults.classpath.forEach(function (c) {
             console.log('adding ' + c + ' to classpath');
             java.classpath.push(c);
         });
-        self.emit('ready');
+        if (nodeToJava.ready) {
+            self.emit('ready');
+        }
+        else {
+            nodeToJava.once('ready', self.emit('ready'));
+        }
     });
 }
 
@@ -58,12 +73,12 @@ ExcelExporter.prototype.export = function (requests, tpl, tplOut, callback) {
 }
 
 ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
-    var context = new JavaMap();
+    var context = new this.java.JavaMap();
     _.each(data, function (d) {
         context.putSync(d.name, nodeToJava.toJavaBean(d.value));
     });
 
-    var transformer = new XLSTransformer();
+    var transformer = new this.java.XLSTransformer();
 
     transformer.transformXLSSync(tpl, context, tplOut);
     callback();
