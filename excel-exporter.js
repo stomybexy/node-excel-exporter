@@ -4,18 +4,18 @@ const util = require('util');
 
 
 var path = require('path');
-var java = require("java");
+
 var mvn = require('node-java-maven');
 var _ = require('underscore');
 
 var nodeToJava = require(path.join(__dirname, 'lib/node-to-java-utils')).create();
 
-
+var java = nodeToJava.java;
 
 function ExcelExporter() {
     var self = this;
     this.ready = false;
-    this.java = {
+    this.cl = {
         XLSTransformer: undefined,
         JavaMap: undefined
     }
@@ -23,8 +23,8 @@ function ExcelExporter() {
 
     this.on('ready', function () {
         self.ready = true;
-        self.java.XLSTransformer = java.import('net.sf.jxls.transformer.XLSTransformer');
-        self.java.JavaMap = java.import('java.util.HashMap');
+        self.cl.XLSTransformer = java.import('net.sf.jxls.transformer.XLSTransformer');
+        self.cl.JavaMap = java.import('java.util.HashMap');
 
     });
 
@@ -34,8 +34,6 @@ util.inherits(ExcelExporter, EventEmitter);
 
 ExcelExporter.prototype._init = function () {
     var self = this;
-
-
     mvn(function (err, mvnResults) {
         if (err) {
             console.error('could not resolve maven dependencies', err);
@@ -43,7 +41,9 @@ ExcelExporter.prototype._init = function () {
                 self.emit('ready');
             }
             else {
-                nodeToJava.once('ready', self.emit('ready'));
+                nodeToJava.once('ready', function () {
+                    self.emit('ready')
+                });
             }
             return;
         }
@@ -73,12 +73,12 @@ ExcelExporter.prototype.export = function (requests, tpl, tplOut, callback) {
 }
 
 ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
-    var context = new this.java.JavaMap();
+    var context = new this.cl.JavaMap();
     _.each(data, function (d) {
         context.putSync(d.name, nodeToJava.toJavaBean(d.value));
     });
 
-    var transformer = new this.java.XLSTransformer();
+    var transformer = new this.cl.XLSTransformer();
 
     transformer.transformXLSSync(tpl, context, tplOut);
     callback();
