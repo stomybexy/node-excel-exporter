@@ -1,7 +1,7 @@
 # node-excel-exporter
-  Export data into excel templates from javascript objects and arrays, sql server, postgres requests.
+  Export data into excel templates from javascript objects and collections.
   This is a partial port of [jxls](http://jxls.sourceforge.net/1.x/index.html) java library to node.
-  For now Only beans and collections export are supported. Databases' resultsets comming soon...
+  
 
   Documentation in progress ... .
 

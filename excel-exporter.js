@@ -55,7 +55,9 @@ ExcelExporter.prototype._init = function () {
             self.emit('ready');
         }
         else {
-            nodeToJava.once('ready', self.emit('ready'));
+            nodeToJava.once('ready', function () {
+                self.emit('ready')
+            });
         }
     });
 }
@@ -75,7 +77,9 @@ ExcelExporter.prototype.export = function (requests, tpl, tplOut, callback) {
 ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
     var context = new this.cl.JavaMap();
     _.each(data, function (d) {
-        context.putSync(d.name, nodeToJava.toJavaBean(d.value));
+       
+            context.putSync(d.name, nodeToJava.toJavaBean(d.value));
+
     });
 
     var transformer = new this.cl.XLSTransformer();
@@ -83,45 +87,6 @@ ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
     transformer.transformXLSSync(tpl, context, tplOut);
     callback();
 }
-
-// ExcelExporter.prototype._export = function (requests, tpl, tplOut, callback) {
-    
-//     //Prepare arguments
-//     var ArrayList = java.import('java.util.ArrayList');
-//     var Request = java.import('com.pactilis.excelReporter.services.Request');
-//     var ReportService = java.import('com.pactilis.excelReporter.services.ReportService');
-//     var reportServ = new ReportService();
-//     var reqList = new ArrayList();
-//     _.each(requests, addReqToList);
-
-//     //building report...
-//     reportServ.runReport(reqList, tpl, tplOut, function (err, res) {
-//         if (err) {
-//             console.log("error generating file", err);
-//             callback(err);
-//             return;
-//         }
-//         console.log("Success generating report", res);
-//         callback(null, res);
-//         return;
-//     });
-
-
-//     function addReqToList(req) {
-//         var r = new Request();
-
-//         r.setDbTypeSync(req.dbType);
-//         r.setDbServerSync(req.dbServer);
-//         r.setDbPortSync(String(req.dbPort));
-//         r.setDbNameSync(req.dbName);
-//         r.setDbUserSync(req.dbUser);
-//         r.setDbPwdSync(req.dbPwd);
-//         r.setVarSync(req.var);
-//         r.setSqlSync(req.sql);
-//         reqList.addSync(r);
-//     }
-// }
-
 
 
 module.exports = {
