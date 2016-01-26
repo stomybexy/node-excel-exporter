@@ -1,6 +1,6 @@
 {
     "name": "node-jxls2",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "",
     "main": "excel-exporter.js",
     "scripts": {
@@ -26,8 +26,8 @@
         "excel-exporter.js"
     ],
     "dependencies": {
-        "java": "^0.5.4",
-        "node-java-maven": "0.0.7",
+        "java": "^0.6.0",
+        "node-java-maven": "^0.0.12",
         "underscore": "^1.8.3"
     },
     "java": {
