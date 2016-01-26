@@ -22,7 +22,6 @@
         "excel-java"
     ],
     "files": [
-        "deps",
         "lib",
         "excel-exporter.js"
     ],
