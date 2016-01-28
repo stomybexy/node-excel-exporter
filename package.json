@@ -1,7 +1,7 @@
 {
     "name": "node-jxls2",
-    "version": "0.2.5",
-    "description": "",
+    "version": "0.2.6",
+    "description": "Export javascript Objects and arrays into excel template.",
     "main": "excel-exporter.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
