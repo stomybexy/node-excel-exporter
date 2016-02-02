@@ -84,8 +84,8 @@ ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
 
     var transformer = new this.cl.XLSTransformer();
 
-    transformer.transformXLSSync(tpl, context, tplOut);
-    callback();
+    transformer.transformXLS(tpl, context, tplOut, callback);
+    
 }
 
 
