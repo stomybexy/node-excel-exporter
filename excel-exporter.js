@@ -1,5 +1,5 @@
 
-const EventEmitter = require('events');
+const EventEmitter = require('events').EventEmitter;
 const util = require('util');
 
 
@@ -30,6 +30,8 @@ function ExcelExporter() {
 
     this._init();
 }
+// ExcelExporter.prototype = Object.create(EventEmitter.prototype);
+// ExcelExporter.constructor = ExcelExporter;
 util.inherits(ExcelExporter, EventEmitter);
 
 ExcelExporter.prototype._init = function () {
