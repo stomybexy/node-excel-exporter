@@ -64,3 +64,4 @@ var tplOut = path.join(__dirname, 'template_out.xlsx');
 excel.export(data, tpl, tplOut, function () {
     console.log('OK');
 })
+

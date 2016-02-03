@@ -78,6 +78,7 @@ ExcelExporter.prototype.export = function (requests, tpl, tplOut, callback) {
 }
 
 ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
+    var self = this;
     var context = new this.cl.JavaMap();
 
     async.each(data, function (d, cb) {
@@ -89,9 +90,10 @@ ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
         if (err) {
             return callback(err);
         }
-        var transformer = new this.cl.XLSTransformer();
+        var transformer = new self.cl.XLSTransformer();
         console.log('TransformXLS...')
         transformer.transformXLS(tpl, context, tplOut, callback);
+        // console.log('Still working...')
     });
 
 }
