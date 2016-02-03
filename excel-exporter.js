@@ -83,7 +83,7 @@ ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
     });
 
     var transformer = new this.cl.XLSTransformer();
-
+    console.log('TransformXLS...')
     transformer.transformXLS(tpl, context, tplOut, callback);
     
 }

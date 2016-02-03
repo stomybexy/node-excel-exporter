@@ -1,11 +1,10 @@
 {
     "name": "node-jxls2",
-    "version": "0.2.9",
+    "version": "0.3.0",
     "description": "Export javascript Objects and arrays into excel template.",
     "main": "excel-exporter.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "node_modules/.bin/node-java-maven"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Jonatan Sombié <jonatan.sombie@gmail.com>",
     "license": "ISC",
