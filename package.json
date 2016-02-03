@@ -1,52 +1,53 @@
 {
-    "name": "node-jxls2",
-    "version": "0.3.0",
-    "description": "Export javascript Objects and arrays into excel template.",
-    "main": "excel-exporter.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "node_modules/.bin/node-java-maven"
-    },
-    "author": "Jonatan Sombié <jonatan.sombie@gmail.com>",
-    "license": "ISC",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/stomybexy/node-excel-exporter.git"
-    },
-    "keywords": [
-        "excel",
-        "xls",
-        "xlsx",
-        "jxls",
-        "java-excel",
-        "excel-java"
-    ],
-    "files": [
-        "lib",
-        "excel-exporter.js"
-    ],
-    "dependencies": {
-        "java": "^0.6.0",
-        "node-java-maven": "^0.0.12",
-        "underscore": "^1.8.3"
-    },
-    "java": {
-        "dependencies": [
-            {
-                "groupId": "net.sf.jxls",
-                "artifactId": "jxls-core",
-                "version": "1.0.6"
-            },
-            {
-                "groupId": "net.sf.jxls",
-                "artifactId": "jxls-reader",
-                "version": "1.0.6"
-            },
-            {
-                "groupId": "commons-io",
-                "artifactId": "commons-io",
-                "version": "2.1"
-            }
-        ]
-    }
+  "name": "node-jxls2",
+  "version": "0.3.1",
+  "description": "Export javascript Objects and arrays into excel template.",
+  "main": "excel-exporter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node_modules/.bin/node-java-maven"
+  },
+  "author": "Jonatan Sombié <jonatan.sombie@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stomybexy/node-excel-exporter.git"
+  },
+  "keywords": [
+    "excel",
+    "xls",
+    "xlsx",
+    "jxls",
+    "java-excel",
+    "excel-java"
+  ],
+  "files": [
+    "lib",
+    "excel-exporter.js"
+  ],
+  "dependencies": {
+    "async": "^1.5.2",
+    "java": "^0.6.0",
+    "node-java-maven": "^0.0.12",
+    "underscore": "^1.8.3"
+  },
+  "java": {
+    "dependencies": [
+      {
+        "groupId": "net.sf.jxls",
+        "artifactId": "jxls-core",
+        "version": "1.0.6"
+      },
+      {
+        "groupId": "net.sf.jxls",
+        "artifactId": "jxls-reader",
+        "version": "1.0.6"
+      },
+      {
+        "groupId": "commons-io",
+        "artifactId": "commons-io",
+        "version": "2.1"
+      }
+    ]
+  }
 }

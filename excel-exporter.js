@@ -1,6 +1,7 @@
 
 const EventEmitter = require('events').EventEmitter;
 const util = require('util');
+var async = require('async');
 
 
 var path = require('path');
@@ -78,16 +79,21 @@ ExcelExporter.prototype.export = function (requests, tpl, tplOut, callback) {
 
 ExcelExporter.prototype._export = function (data, tpl, tplOut, callback) {
     var context = new this.cl.JavaMap();
-    _.each(data, function (d) {
-       
-            context.putSync(d.name, nodeToJava.toJavaBean(d.value));
 
+    async.each(data, function (d, cb) {
+        nodeToJava.toJavaBean(d.value, function (err, res) {
+            context.put(d.name, res, cb);
+        })
+        // context.putSync(d.name, nodeToJava.toJavaBean(d.value));
+    }, function (err) {
+        if (err) {
+            return callback(err);
+        }
+        var transformer = new this.cl.XLSTransformer();
+        console.log('TransformXLS...')
+        transformer.transformXLS(tpl, context, tplOut, callback);
     });
 
-    var transformer = new this.cl.XLSTransformer();
-    console.log('TransformXLS...')
-    transformer.transformXLS(tpl, context, tplOut, callback);
-    
 }
 
 
